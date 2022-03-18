@@ -1,0 +1,199 @@
+CS360 EXAM   NAME___Garth Bates			ID 114703063
+
+         NOTE!!!! WRITE YOUR ANASERS IN THE SPACE PROVIDED ONLY.
+------------------------------------------------------------------------
+         POINTS: 20 questions, 5 points each. TOTAL: 100 points
+------------------------------------------------------------------------
+
+1. Assume: char buf[512] contains 4 partitions P1, P2, P3, P4, which begin at
+   the byte offset 0x1BE. Each partition is a
+
+       struct partition{ char dummy[8]; int start_sector, nr_sectors; };
+
+(1). Define a partition POINTER and let it point at P3 in buf[]:
+
+
+partition * P3 = read_partition(2, buff, start_sector);
+
+
+
+
+(2). Print the start_sector of P3:
+
+printf("%8d", p3 -> start_sector);
+
+
+
+
+
+2. YOU wrote a myprintf() function before. Consider the following C program:
+
+  --------------------------------------------------------------------------
+   int f, g = 123; char *s="string";|   // YOUR myprintf function
+   int main(int argc, char *argv[]) |   int myprintf(                      )
+   {                                |   { 
+     int a = 1, b = 2;              |       char *cp;  int *ip;
+     myprintf("%d %d %s",a,b,s);    |   HERE: 
+   }                                |   }
+  ---------------------------------------------------------------------------
+(1). YOUR myprintf() function head is incomplete. Make it complete.
+
+int myprintf(char *args[])
+
+
+(2). Which of the variables f,g,s,a,b,cp,ip are in a.out file?
+     WHY?
+g,a,s,b,cp,ip are in a.out since they are compiled from the c program.
+
+
+(3). Execution is at the label HERE: Draw a diagram to show the stack contents
+  from HERE to argv of main(). Also, show the STACK FRAME pointer of myprintf()
+
+
+int b -> int a -> FS* myrpintf() -> char *s -> int g -> int f
+
+     
+
+
+
+(4). While at HERE, how to tell CPU where is the local variable cp?
+     where is the parameter a?
+
+
+
+3.(1). Write C statements to define a node structure with the following items:
+----------------------------------------------- WRITE your ANSWER HERE ---------
+name   : an array of 32 chars;        |   char name[32];
+child  : pointer to fisrt child node; |   char * child = name[0];
+sibling: pointer to next sibling node;|	  char * sibling = child->next;
+--------------------------------------|----------------------------------------
+Then, define a node variable  X :
+
+      define a node POINTER p and let it point at X :
+NODE x = new NODE;
+NODE * p = x;
+
+
+(2). Redraw the general tree shown as a BINARY tree by child, sibling pointers
+         A                        |             A        // & \\ denote sibling pointers
+         |                        |	       / \        / & \  denot child pointers
+     ---------                    |           B   C
+     B   C   D (child of A)       |              / \\ 
+         |                        |             E    D
+       ------                     |		 \\
+       E   F   (child of C)       |   		  F
+------------------------------------------------------------------------------
+
+(3). Assume: p points at a node X in a BINARY tree, q points at a new node.
+     Write C code to add q as a child of X.
+
+
+if(p->child == null)
+{
+	set.p->child = q;	
+}
+
+
+
+
+(4). Write C code to print the names of all (direct) child nodes of X.
+
+printChildren(NODE * X){
+	while(X->child!=null){
+		printf("%s", X->child.name);
+		X = X->child;
+		printChildren(X);
+	}
+}
+
+4. Assume YOUR sh of LAB3: Given:
+     int pid, status; char line[128];
+     
+(1). Write C code to
+     gets(line);   // get a command line
+     fork a child; parent wait for child to die; then repeat gets();
+	
+	while(child != dead)
+	{
+		fork.child();
+		child(line);
+		kill.child();
+	}
+
+
+
+------------------------------ child sh --------------------------------------
+(2). Assume gets(line); got a line = CMD a b c > outfile
+     Write C code to divide the command line in char line[ ] into token strings
+
+tokenize (char [] line) {
+	char* a= line[0];
+	while( a != null){
+		token.a = new token("%s", a);
+		a++;
+	}
+
+(3). Write C code to do   > outfile
+
+
+
+
+
+
+
+
+(4). Assume the CMD file is in the /bin directory. Write C code to execute CMD,
+     passing myargv[], env[] as parameters :
+
+
+
+(5). For the command line = CMD a b c > outfile, show EXACLY what is myargv[]
+
+myargv[] = [a,b,c]
+
+
+(6). Assume command line = cat file | grep print 
+     Wrtie C code to handle the pipe symbol | 
+     
+	tokenize(line.parse("|"));	
+	
+
+
+
+
+
+
+
+
+
+5. For the following code segments:
+
+       int total = 0;  pthread_mutex m;   // an intitlaized mutex
+       
+       void *func(void *arg)
+       { 
+   S1:    int value = (int)arg;
+   S2:    total += value;   
+   S3:    pthread_exit(value);   
+       }
+       int main()
+       {  pthread_t tid[4];   int status;
+
+------------------Write CODE for main thread -----------------------------
+(1).  Create 4 threads to execute func(), each with a unique arg value 1 to 4.
+   
+
+
+
+(2).   Wait for all 4 threads to terminate :
+	pthread_join(threads);
+	pthread_barrier(threads);
+
+
+(3). Which statement in func() is a Critical Region?
+     WHY?
+	S3 since it tells the thread to exit. If its not there the program crashes.
+
+
+(4). Write C code to protect the Critical Region:
+

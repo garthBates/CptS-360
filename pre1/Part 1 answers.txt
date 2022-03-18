@@ -1,0 +1,48 @@
+(A). For each case, use cc -m32 t.c to generate a.out. 
+     Then use  ls -l a.out to get a.out size.
+          run  size a.out  to get its section sizes.
+
+     Record the observed sizes in a table:
+
+          Case  | a.out |  TEXT  |  DATA  |  BSS   |
+        --------------------------------------------
+          (1)    7364    1148     276      8
+        --------------------------------------------  
+          (2)    7368    1148     280      4        
+        --------------------------------------------
+          (3)    7364    1148     276      40032
+        --------------------------------------------
+          (4)    47400   1148     40300    4
+        --------------------------------------------
+          (5)    7412    1281     280      8
+        --------------------------------------------        
+          (6)    7456    1164     276      40068
+        --------------------------------------------
+
+                  ANSWER THESE QUESTIONS:
+
+   1. Variables in C may be classified as
+
+          globals ---|--- UNINITIALIZED  globals;
+                     |---   INITIALIZED  globals;
+
+          locals  ---|--- AUTOMATIC locals;
+                     |--- STATIC    locals;
+
+   In terms of the above classification and the variables g, a, b, c, d,
+
+      Which variables are in DATA? ____________A,B,C,D___________________
+      Which variables are in BSS ? 
+____________G_________________________
+
+   2. In terms of the TEXT, DATA and BSS sections,
+      Which sections are in a.out, which section is NOT in a.out?
+      WHY?_DATA and BSS are in TEXT is out since it is made during execution.
+
+  (B). For each case, use   cc -m32 -static t.c   to generate a.out.
+       Record the sizes again and compare them with the sizes in (A).
+       WHAT DO YOU SEE?
+_______The sizes for every file and each part are much larger than before.
+
+       WHY?
+_______When comipling the files with -static it compiles with static linking which includes all need library functions into a.out. This makes with self contained but quite large.

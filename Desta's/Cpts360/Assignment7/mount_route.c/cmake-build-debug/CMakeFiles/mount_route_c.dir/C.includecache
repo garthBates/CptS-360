@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/Desta/Desktop/School/Cpts360/Assignment7/mount_route.c/main.c
+types.h
+C:/Users/Desta/Desktop/School/Cpts360/Assignment7/mount_route.c/types.h
+
+C:/Users/Desta/Desktop/School/Cpts360/Assignment7/mount_route.c/types.h
+stdio.h
+-
+stdlib.h
+-
+fcntl.h
+-
+ext2fs/ext2_fs.h
+-
+libgen.h
+-
+string.h
+-
+sys/stat.h
+-
+sys/types.h
+-
+unistd.h
+-
+
